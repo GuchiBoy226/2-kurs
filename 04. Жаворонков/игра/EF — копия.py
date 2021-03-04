@@ -33,7 +33,7 @@ pygame.mixer.music.load('yaponia.mp3')#музыка,|                     #|
 pygame.mixer.music.play()         #___
 lk="3.png"
 k="2.png"
-def right_left(k,lk):
+def right_left(k,lk):    ##анимация вниз кулаков
     image1 = pygame.image.load(k).convert_alpha()
     image2= pygame.image.load(lk).convert_alpha()
     screen.fill(GOLD)
@@ -43,7 +43,7 @@ def right_left(k,lk):
     screen.blit(new_image2, (10, 145))
     screen.blit(new_image, (180, 145))
     pygame.display.update()
-def right_left_stuk(k,lk):
+def right_left_stuk(k,lk): ##анимация вверх кулаков
     image1 = pygame.image.load(k).convert_alpha()
     image2= pygame.image.load(lk).convert_alpha()
     screen.fill(GOLD)
@@ -53,7 +53,7 @@ def right_left_stuk(k,lk):
     screen.blit(new_image2, (10, 120))
     screen.blit(new_image, (180, 120))
     pygame.display.update()
-def proigral_right(k,lk):
+def proigral_right(k,lk): ###проиграл правый
     image1 = pygame.image.load(k).convert_alpha()
     image2= pygame.image.load(lk).convert_alpha()
     screen.fill(GOLD)
@@ -68,7 +68,7 @@ def proigral_right(k,lk):
      pygame.display.update()
      screen.fill(GOLD)
      screen.blit(bg,(0,0))
-def proigral_left(k,lk):
+def proigral_left(k,lk): ###анимация когда проиграл левый игрок k,lk переменные для картинок
     image1 = pygame.image.load(k).convert_alpha()
     image2= pygame.image.load(lk).convert_alpha()
     screen.fill(GOLD)
@@ -83,7 +83,7 @@ def proigral_left(k,lk):
      pygame.display.update()
      screen.fill(GOLD)
      screen.blit(bg,(0,0))
-def nikto(k,lk):
+def nikto(k,lk):  ##когда ничья идёт анимаация
     image1 = pygame.image.load(k).convert_alpha()
     image2= pygame.image.load(lk).convert_alpha()
     screen.fill(GOLD)
@@ -107,7 +107,7 @@ def nikto(k,lk):
     pygame.display.update()
     screen.fill(GOLD)
     screen.blit(bg,(0,0))
-def draw_shield_bar(surf, x, y, pct):
+def draw_shield_bar(surf, x, y, pct):##отрисовывает хп,писал не я.Скопировал:) и подкоректировал ниже идёт одна отривока текста на экране
     BAR_LENGTH = 100
     BAR_HEIGHT = 10
     fill = (pct / 10) * BAR_LENGTH
@@ -115,7 +115,7 @@ def draw_shield_bar(surf, x, y, pct):
     fill_rect = pygame.Rect(x, y, fill, BAR_HEIGHT)
     pygame.draw.rect(surf, RED, fill_rect)
     pygame.display.update()
-def one_two(sur,X,Y,TEXT):
+def one_two(sur,X,Y,TEXT):   ###отрисоввывает текст не помню зачем два одинаковых one_two
     font = pygame.font.Font(None, 20)
     text = font.render(TEXT, True, WHITE)
     textpos = (X, Y)
@@ -145,14 +145,13 @@ def texaRed(sur,X,Y,TEXT):
     textpos = (X, Y)
     sur.blit(text,textpos)
     pygame.display.update()
-right_left(k,lk)
 pygame.display.update()
 htth=10
 z=1
 zhopa=0
 songhh=pygame.mixer.Sound('ya1.mp3')
 class Human(object):
-    def __init__(self,ochko,hp,sila,lovkost,uroven):
+    def __init__(self,ochko,hp,sila,lovkost,uroven):  ##класс игроков
         self.uroven=uroven
         self.hp=hp
         self.sila=sila
@@ -169,11 +168,11 @@ class Human(object):
       self.lovkost-=1
       return(self.lovkost)
 
-NEKIT = Human(0,3,1,1000,0)
-Oleg = Human(0,3,1,0,0)
+NEKIT = Human(0,5,1,0,0) ###некит вроде левый игрок олег правый игрок
+Oleg = Human(0,5,1,0,0)
 def obrabotkaLVL(Oleg,v):
  global htth,z,zhopa
- if (Oleg.uroven/z)>=htth+1: ####затруднение для прокачки
+ if (Oleg.uroven/z)>=htth+1: ####затруднение для прокачки и появление картинок с прокачкой
     htth+=10
     z+=1
  if Oleg.ochko==0:
@@ -199,9 +198,9 @@ def obrabotkaLVL(Oleg,v):
                 if positiion[0]>=100 and positiion[0]<=160 and positiion[1]>=60 and positiion[1]<=120:
                     dd+=1
                 if positiion[0]>=200 and positiion[0]<=260 and positiion[1]>=60 and positiion[1]<=120:
-                    dg+=1
+                    dg+=5
                 if positiion[0]>=300 and positiion[0]<=360 and positiion[1]>=60 and positiion[1]<=120:
-                    dl+=2
+                    dl+=4
      pygame.display.update()
      Oleg.ochko=Oleg.ochko-(dd+dg+dl)
      Oleg.sila+=dd
@@ -209,7 +208,7 @@ def obrabotkaLVL(Oleg,v):
      Oleg.hp+=dl
      zhopa=dd+dg+dl
  return(htth,z,zhopa)
-def gameru(player,player2,y,UKL):
+def gameru(player,player2,y,UKL):    ######### все правила игры в основном
      if player==y[0] and player2==y[0]:
         songhh.play()
         k="2.png"
@@ -219,7 +218,7 @@ def gameru(player,player2,y,UKL):
            if player==y[0] and player2==y[1]:
               songhh.play()
               ulo=[r for r in range(101)]
-              lua=[random.choice(ulo)for t in range(Oleg.lovkost)]
+              lua=[random.choice(ulo)for t in range(Oleg.lovkost)]  ####эти все команды до иначе работают на ловкость.СНачала пк создаёт рандомное число после игроки содают рандомные числа.рандомные числа игроков столько сколько ловкости и если хоть одна из чисел совпадёт с числом пк то крит урон по игроку.Иначе обычные действия игры камня ножницы и бумаги
               UKL=1
               ulo=random.randint(0,100)
               zzh=0
@@ -540,16 +539,16 @@ def gameru(player,player2,y,UKL):
 piki=0
 # Цикл игры
 running = True
-while running:
+while running:                    ##использование всех функций которые создал рание вообщем все вызывания команд для игры
     # Держим цикл на правильной скорости
     clock.tick(FPS)
     # Ввод процесса (события)
     nlox=120
     draw_shield_bar(screen, 180, 200, Oleg.hp)
-    draw_shield_bar(screen, 180, 180, NEKIT.hp)
+    draw_shield_bar(screen, 180, 180, NEKIT.hp) ####как я и говорил отрисовывает хп
     one_two(screen,nlox,180,"Левый")
     one_two(screen,nlox,200,"Правый")
-    if pygame.mixer.music.get_busy()==False:
+    if pygame.mixer.music.get_busy()==False:    ## переключение музыки если она заканчивается
       pygame.mixer.music.load(gf[0])
       pik+=1
       if pik!=len(gf):
@@ -569,7 +568,7 @@ while running:
         one_two(screen,nlox,180,"Левый")
         one_two(screen,nlox,200,"Правый")
         if piki==1:
-         one_two1(screen,280,60,"3")
+         one_two1(screen,280,60,"3") ### 3 2 1 нажимайте тоесть таймер чтобы итгрокам понимать когда нажимвать или они могут по договорённости
         if piki==2:
          one_two1(screen,280,60,"2")
         if piki==3:
@@ -591,7 +590,7 @@ while running:
             if i.type == pygame.QUIT:
                 running = False
             if i.type == pygame.KEYDOWN:
-                if i.key == pygame.K_1:
+                if i.key == pygame.K_1:           ####ждёт нажатие кнопок 1-камень 2-ножницы 3-бумага 8-камень 9-ножницы 0-бумага
                     player=y[0]
                 elif i.key == pygame.K_2:
                     player=y[1]
@@ -611,7 +610,7 @@ while running:
 
 
 
-        if NEKIT.ochko!=0:
+        if NEKIT.ochko!=0: ###это вызывает то окно с прокачкой если у кого-то есть не прокаченный скил
             obrabotkaLVL(NEKIT,1)
             NEKIT.opit()
 
@@ -619,19 +618,19 @@ while running:
             obrabotkaLVL(Oleg,2)
             Oleg.opit()
 
-        if Oleg.hp<=0:
+        if Oleg.hp<=0: ### если хп у игроков нет то игра начинается сначала=) Всё я пошёл на английский. ведь как видно в коде английский на уровне 0)
             tyh1+=1
             texa(screen,110,250,"левый игрок выиграл".upper())
             texaGreen(screen,270,300,str(tyh1))
             texaRed(screen,310,300,str(tyh2))
             time.sleep(3)
             NEKIT.sila=1
-            NEKIT.hp=3
+            NEKIT.hp=5
             NEKIT.ochko=0
             NEKIT.uroven=0
             NEKIT.lovkost=0
             Oleg.sila=1
-            Oleg.hp=3
+            Oleg.hp=5
             Oleg.ochko=0
             Oleg.uroven=0
             Oleg.lovkost=0
@@ -642,12 +641,12 @@ while running:
             texaGreen(screen,310,300,str(tyh2))
             time.sleep(3)
             NEKIT.sila=1
-            NEKIT.hp=3
+            NEKIT.hp=5
             NEKIT.ochko=0
             NEKIT.uroven=0
             NEKIT.lovkost=0
             Oleg.sila=1
-            Oleg.hp=3
+            Oleg.hp=5
             Oleg.ochko=0
             Oleg.uroven=0
             Oleg.lovkost=0
